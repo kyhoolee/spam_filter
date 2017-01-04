@@ -85,17 +85,7 @@
     		<version>${guava.version}</version>
 		</dependency>
 
-		<!-- babe -->
-		<dependency>
-			<groupId>id.co.babe</groupId>
-			<artifactId>babe-common</artifactId>
-			<version>${babe.common.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>id.co.babe</groupId>
-			<artifactId>babe-common-io</artifactId>
-			<version>${babe.common.io.version}</version>
-		</dependency>
+
 
 	</dependencies>
 </project>
