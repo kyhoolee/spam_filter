@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>id.co.babe</groupId>
+	<artifactId>babe-spam-filter</artifactId>
+	<version>1.0</version>
+	<packaging>jar</packaging>
+	
+	<properties>
+		<babe.common.version>1.0</babe.common.version>
+		<babe.common.io.version>1.0</babe.common.io.version>
+		<slf4j.version>1.7.21</slf4j.version>
+		<commons.io.version>2.4</commons.io.version>
+		<commons.lang3.version>3.4</commons.lang3.version>
+		<commons.collections.version>3.2.1</commons.collections.version>
+		<gson.version>2.7</gson.version>
+		<guava.version>12.0</guava.version>
+		<junit.version>4.12</junit.version>
+		<jsch.version>0.1.53</jsch.version>
+		<httpasyncclient.version>4.1.2</httpasyncclient.version>
+		<httpcore.version>4.4.5</httpcore.version>
+		<maven.source.version>1.7</maven.source.version>
+		<maven.target.version>1.7</maven.target.version>
+		<maven.properties.plugin.version>1.0</maven.properties.plugin.version>
+	</properties>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>${maven.source.version}</source>
+					<target>${maven.target.version}</target>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+	<dependencies>
+		<!-- slf4j logging -->
+		<dependency> 
+			<groupId>org.slf4j</groupId>
+                	<artifactId>slf4j-log4j12</artifactId>
+			<version>${slf4j.version}</version>
+		</dependency>
+
+		<!-- apache commons -->
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>${commons.io.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+			<version>${commons.lang3.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-collections</groupId>
+			<artifactId>commons-collections</artifactId>
+			<version>${commons.collections.version}</version>
+		</dependency>
+		
+		<!-- http clients -->
+		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpasyncclient</artifactId>
+			<version>${httpasyncclient.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpcore</artifactId>
+			<version>${httpcore.version}</version>
+		</dependency>
+		
+		<!-- google -->
+		<dependency>
+			<groupId>com.google.code.gson</groupId>
+			<artifactId>gson</artifactId>
+			<version>${gson.version}</version>
+		</dependency>
+		<dependency>
+    		<groupId>com.google.guava</groupId>
+    		<artifactId>guava</artifactId>
+    		<version>${guava.version}</version>
+		</dependency>
+
+		<!-- babe -->
+		<dependency>
+			<groupId>id.co.babe</groupId>
+			<artifactId>babe-common</artifactId>
+			<version>${babe.common.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>id.co.babe</groupId>
+			<artifactId>babe-common-io</artifactId>
+			<version>${babe.common.io.version}</version>
+		</dependency>
+
+	</dependencies>
+</project>
