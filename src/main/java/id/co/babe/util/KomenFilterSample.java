@@ -17,13 +17,13 @@ public class KomenFilterSample {
 
 	private static KomenDataset buildData() {
 		KomenDataset data = new KomenDataset();
-
-		data.updateData(DataReader.readSpamKomens(ROOT + "spam_komen.txt"), 1);
-		data.updateData(DataReader.readSpamKomens(ROOT + "spam_output.txt.1"), 0.9);
-		data.updateData(DataReader.readNormalKomens(ROOT + "pure_comments.txt.1"), 0.9);
-		data.updateData(DataReader.readSpamKomens(ROOT + "pure_spam.txt.1"), 0.9);
-		data.updateData(DataReader.readSpamKomens(ROOT + "pure_spam_1.txt.1"), 0.9);
-		data.updateData(DataReader.readSpamKomens(ROOT + "spam_unique.txt.1"), 0.9);
+		data.updateData(DataReader.readSpamKomens(ROOT + "spam_14_2_2017.txt"), 1);
+		//data.updateData(DataReader.readSpamKomens(ROOT + "spam_komen.txt"), 0.1);
+		//data.updateData(DataReader.readSpamKomens(ROOT + "spam_output.txt.1"), 0.1);
+		data.updateData(DataReader.readNormalKomens(ROOT + "pure_comments.txt.1"), 0.1);
+		//data.updateData(DataReader.readSpamKomens(ROOT + "pure_spam.txt.1"), 0.1);
+		//data.updateData(DataReader.readSpamKomens(ROOT + "pure_spam_1.txt.1"), 0.1);
+		//data.updateData(DataReader.readSpamKomens(ROOT + "spam_unique.txt.1"), 0.1);
 
 		System.out.println("Train data: ");
 		System.out.println(data.train_pos + " -- " + data.train_neg);

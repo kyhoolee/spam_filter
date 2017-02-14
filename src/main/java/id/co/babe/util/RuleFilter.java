@@ -125,10 +125,10 @@ public class RuleFilter {
 	public static double specialCharacter(String input) {
 		double result = 0; 
 		
-		String alphaAndDigits = input.replaceAll("[�ﾀﾣﾤ£$_@]+","");
+		String alphaAndDigits = input.replaceAll("[�ﾀﾣﾤ£$_@ß∆]+","");
 		result = input.length() - alphaAndDigits.length();
 		double size = input.split("\\s+").length;
-		//result = result / size;
+		result = 0;//result / size;
 		
 		return result;
 	}
