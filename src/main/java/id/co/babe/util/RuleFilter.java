@@ -21,7 +21,7 @@ public class RuleFilter {
 			"0813", "0851", "0856", "0857", "0858","0821","0812", "0878", "0853", "0852",
 			"0818", "0877","081", "0822", "0811", "0877",
 			
-			"fb.com", "line", "p://", "www"
+			"fb.com", "line", "p://", "www", "http://­"
 			
 			));
 	
@@ -31,6 +31,7 @@ public class RuleFilter {
 
 		if(
 			(specialWordRule(input) > 3)  
+				|| (specialCharacter(input) > 2)
 				|| (singlecharacterRule(input) > 0.3)
 				|| (specialWordRule(input) >= 1 && blackWord(input) > 1)
 				|| (specialWordRule(input) > 3 && blackWord(input) >= 1)
@@ -48,8 +49,9 @@ public class RuleFilter {
 	public static String ruleNormal(String input) {
 		//0.017857142857142856 -- 42.0 -- 12 -- 0.0 -- 0.0 -- 
 		//0.027522935779816515 -- 19.0 -- 0 -- 0.10526315789473684 -- 0.0 
-		if( (specialWordRule(input) < 10 && blackWord(input) < 1 && contactWord(input) < 1 && !specialSpam(input))
-				|| (blackWord(input) <= 1 && specialWordRule(input) <= 2 && singlecharacterRule(input) <= 1 && contactWord(input) < 1 && !specialSpam(input))
+		if( 
+				(specialWordRule(input) < 10 && blackWord(input) < 1 && contactWord(input) < 1 && !specialSpam(input) && specialCharacter(input) < 1)
+				|| (blackWord(input) <= 1 && specialWordRule(input) <= 2 && singlecharacterRule(input) <= 1 && contactWord(input) < 1 && !specialSpam(input) && specialCharacter(input) < 1)
 				) {
 			return Komen.NORMAL;
 		}
@@ -61,6 +63,7 @@ public class RuleFilter {
 		String sep = " -- ";
 		String result = (
 				specialWordRule(input) + sep 
+				+ specialCharacter(input) + sep
 				+ singlecharacterRule(input) + sep
 				+ blackWord(input) + sep 
 				+ contactWord(input) + sep
@@ -119,6 +122,16 @@ public class RuleFilter {
 		return check;
 	}
 	
+	public static double specialCharacter(String input) {
+		double result = 0; 
+		
+		String alphaAndDigits = input.replaceAll("[�ﾀﾣﾤ£$_@]+","");
+		result = input.length() - alphaAndDigits.length();
+		double size = input.split("\\s+").length;
+		//result = result / size;
+		
+		return result;
+	}
 
 	
 	public static int specialWordRule(String input) {

@@ -14,6 +14,15 @@ public class DataReader {
     private static final char DEFAULT_QUOTE = '"';
     
     public static void main(String[] args) {
+    
+    }
+    
+    public static void readTotalSpamCsv(String filePath) {
+    	
+    }
+    
+    
+    public static void checkSample() {
     	
     	List<Komen> komens = tokenFilter(readKomensCsv(SOURCE + "/label_komen2.csv"));
     	int spam = 0;
@@ -33,6 +42,8 @@ public class DataReader {
     	
     	
     }
+    
+    
     
     public static KomenDataset buildSample(KomenDataset dataset, String name, double train_prob) {
     	String filePath = SOURCE + "/" + name;
