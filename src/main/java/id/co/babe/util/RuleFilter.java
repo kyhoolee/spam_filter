@@ -97,6 +97,7 @@ public class RuleFilter {
 		
 		result += Util.bbPin(input).size();
 		result += Util.phoneNumber(input).size();
+		result += Util.email(input).size();
 		
 		return result;
 	}
@@ -122,13 +123,15 @@ public class RuleFilter {
 		return check;
 	}
 	
+	
+	
 	public static double specialCharacter(String input) {
 		double result = 0; 
 		
-		String alphaAndDigits = input.replaceAll("[�ﾀﾣﾤ£$_@ß∆]+","");
+		String alphaAndDigits = input.replaceAll("[�ﾀﾣﾤ£$_@ß∆¥《》ŠŞÅ]+","");
 		result = input.length() - alphaAndDigits.length();
 		double size = input.split("\\s+").length;
-		result = 0;//result / size;
+		//result = 0;//result / size;
 		
 		return result;
 	}

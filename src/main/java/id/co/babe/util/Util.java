@@ -103,6 +103,18 @@ public class Util {
 
 		return result;
 	}
+	
+	public static List<String> email(String input) {
+		List<String> result = new ArrayList<String>();
+	    //String s = "*** test@gmail.com&&^ test2@gmail.com((& ";
+	    Matcher m = Pattern.compile("[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+").matcher(input);
+	    while (m.find()) {
+	        String str = (m.group());
+	        result.add(str);
+	    }
+	    
+	    return result;
+	}
 
 	public static List<String> bbPin(String input) {
 		input = input.toLowerCase();
