@@ -1,9 +1,11 @@
 package id.co.babe.util;
 
+import java.text.Normalizer;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.regex.Pattern;
 
 import id.co.babe.util.Util;
 
@@ -127,13 +129,43 @@ public class RuleFilter {
 	
 	public static double specialCharacter(String input) {
 		double result = 0; 
-		
-		String alphaAndDigits = input.replaceAll("[�ﾀﾣﾤ£$_@ß∆¥《》ŠŞÅ]+","");
+		//String resultString = subjectString.replaceAll("[^\\x00-\\x7F]", "");
+		String alphaAndDigits = input.replaceAll("[�ﾀﾣﾤ£$_ß∆¥《》ŠŞÅ]+",""); //"[^\\x00-\\x7F]","");//
 		result = input.length() - alphaAndDigits.length();
 		double size = input.split("\\s+").length;
-		//result = 0;//result / size;
+		result += accentDistance(input);//0;//result / size;
 		
 		return result;
+	}
+	
+	
+	public static double accentDistance(String input) {
+		String de_accent = deAccent(input);
+		double result = getHammingDistance(input, de_accent);
+		return result;
+	}
+
+	public static String deAccent(String str) {
+	    String nfdNormalizedString = Normalizer.normalize(str, Normalizer.Form.NFD); 
+	    Pattern pattern = Pattern.compile("\\p{InCombiningDiacriticalMarks}+");
+	    return pattern.matcher(nfdNormalizedString).replaceAll("");
+	}
+	
+	public static int getHammingDistance(String sequence1, String sequence2) {
+	    char[] s1 = sequence1.toCharArray();
+	    char[] s2 = sequence2.toCharArray();
+
+	    int shorter = Math.min(s1.length, s2.length);
+	    int longest = Math.max(s1.length, s2.length);
+
+	    int result = 0;
+	    for (int i=0; i<shorter; i++) {
+	        if (s1[i] != s2[i]) result++;
+	    }
+
+	    result += longest - shorter;
+
+	    return result;
 	}
 
 	

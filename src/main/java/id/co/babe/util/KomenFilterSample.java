@@ -11,19 +11,27 @@ public class KomenFilterSample {
 		// logisticFilter();
 		//trainModel();
 		estimate();
+		//checkRule();
+	}
+	
+	public static void checkRule() {
+		String data = "ÙÙ„Ø¹ï¿½ Ø© Ø§Ù„Ù„Ù‡ Ø¹Ù„Ù‰ Ø§Ù„ÙƒØ§ÙØ±ÙŠÙ†...";
+		String output = RuleFilter.deAccent(data);
+		System.out.println(output);
 	}
 
 	public static final String ROOT = "";//"/home/mainspring/tutorial/learn/text-classifier/data/";
 
 	private static KomenDataset buildData() {
 		KomenDataset data = new KomenDataset();
+		data.updateData(DataReader.readSpamKomens(ROOT + "192_spams.txt"), 1);
 		data.updateData(DataReader.readSpamKomens(ROOT + "spam_15_2.txt"), 1);
-		//data.updateData(DataReader.readSpamKomens(ROOT + "spam_komen.txt"), 0.1);
-		//data.updateData(DataReader.readSpamKomens(ROOT + "spam_output.txt.1"), 0.1);
-		data.updateData(DataReader.readNormalKomens(ROOT + "pure_comments.txt.1"), 0.1);
-		//data.updateData(DataReader.readSpamKomens(ROOT + "pure_spam.txt.1"), 0.1);
-		//data.updateData(DataReader.readSpamKomens(ROOT + "pure_spam_1.txt.1"), 0.1);
-		//data.updateData(DataReader.readSpamKomens(ROOT + "spam_unique.txt.1"), 0.1);
+		data.updateData(DataReader.readSpamKomens(ROOT + "spam_komen.txt"), 0.8);
+		//data.updateData(DataReader.readSpamKomens(ROOT + "spam_output.txt.1"), 0.8);
+		data.updateData(DataReader.readNormalKomens(ROOT + "pure_comments.txt.1"), 0.8);
+		//data.updateData(DataReader.readSpamKomens(ROOT + "pure_spam.txt.1"), 0.8);
+		//data.updateData(DataReader.readSpamKomens(ROOT + "pure_spam_1.txt.1"), 0.8);
+		//data.updateData(DataReader.readSpamKomens(ROOT + "spam_unique.txt.1"), 0.8);
 
 		System.out.println("Train data: ");
 		System.out.println(data.train_pos + " -- " + data.train_neg);
@@ -73,11 +81,11 @@ public class KomenFilterSample {
 			String res = ruleInference(k.content);
 			
 			if (k.label == Komen.SPAM && res == Komen.NORMAL) {
-				falsePosList.add(k.content);//RuleFilter.printRule(k.content));//
+				falsePosList.add(RuleFilter.printRule(k.content));//k.content);//
 			}
 
 			if (k.label == Komen.NORMAL && res == Komen.SPAM) {
-				falseNegList.add(k.content);//RuleFilter.printRule(k.content));
+				falseNegList.add(RuleFilter.printRule(k.content));//k.content);//
 			}
 
 			if (k.label == Komen.NORMAL) {

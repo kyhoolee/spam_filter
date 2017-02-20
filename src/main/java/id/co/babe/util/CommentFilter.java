@@ -18,4 +18,11 @@ public class CommentFilter {
 
 		return res;
 	}
+	
+	public static void main(String[] args) {
+		String res = ruleInference("Obat perangsanh 50rb,pin bb 56f9a5431");
+		System.out.println(res);
+	}
+	
+	
 }
