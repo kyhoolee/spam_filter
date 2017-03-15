@@ -33,6 +33,7 @@ public class RuleFilter {
 
 		if(
 			(specialWordRule(input) > 3)  
+			|| (singlecharacterRule(input) > 0.75)
 				|| (specialCharacter(input) > 2)
 				|| (singlecharacterRule(input) > 0.3)
 				|| (specialWordRule(input) >= 1 && blackWord(input) > 1)
@@ -52,8 +53,8 @@ public class RuleFilter {
 		//0.017857142857142856 -- 42.0 -- 12 -- 0.0 -- 0.0 -- 
 		//0.027522935779816515 -- 19.0 -- 0 -- 0.10526315789473684 -- 0.0 
 		if( 
-				(specialWordRule(input) < 10 && blackWord(input) < 1 && contactWord(input) < 1 && !specialSpam(input) && specialCharacter(input) < 1)
-				|| (blackWord(input) <= 1 && specialWordRule(input) <= 2 && singlecharacterRule(input) <= 1 && contactWord(input) < 1 && !specialSpam(input) && specialCharacter(input) < 1)
+				(specialWordRule(input) < 10 && blackWord(input) < 1 && contactWord(input) < 1 && !specialSpam(input) && specialCharacter(input) < 1 && singlecharacterRule(input) < 0.7)
+				|| (blackWord(input) <= 1 && specialWordRule(input) <= 2 && singlecharacterRule(input) <= 1 && contactWord(input) < 1 && !specialSpam(input) && specialCharacter(input) < 1 && singlecharacterRule(input) < 0.7)
 				) {
 			return Komen.NORMAL;
 		}
@@ -65,6 +66,7 @@ public class RuleFilter {
 		String sep = " -- ";
 		String result = (
 				specialWordRule(input) + sep 
+				+ singlecharacterRule(input)
 				+ specialCharacter(input) + sep
 				+ singlecharacterRule(input) + sep
 				+ blackWord(input) + sep 
@@ -120,7 +122,7 @@ public class RuleFilter {
 				count ++;
 		}
 		
-		double check = (double) count * 1.0 / words.length;
+		double check =(double) count * 1.0 / words.length;
 		
 		return check;
 	}
@@ -130,10 +132,28 @@ public class RuleFilter {
 	public static double specialCharacter(String input) {
 		double result = 0; 
 		//String resultString = subjectString.replaceAll("[^\\x00-\\x7F]", "");
-		String alphaAndDigits = input.replaceAll("[�ﾀﾣﾤ£$_ß∆¥《》ŠŞÅ]+",""); //"[^\\x00-\\x7F]","");//
+		String alphaAndDigits = input.replaceAll("[�ﾀﾣﾤ£$_ß∆¥《》ŠŞÅ¬ð🅰♏♏ⓐβⓓΣ]+",""); //"[^\\x00-\\x7F]","");//
 		result = input.length() - alphaAndDigits.length();
 		double size = input.split("\\s+").length;
-		result += accentDistance(input);//0;//result / size;
+		result += accentDistance(input) /2;//0;//result / size;
+		
+		return result;
+	}
+	
+	
+	public static double shortWord(String input) {
+		double result = 0;
+		double length = input.length();
+		
+		if(length == 0)
+			return 1.0;
+		
+		String[] ws = input.split("\\s+");
+		for(int i = 0 ; i < ws.length ; i++) {
+			if(ws[i].length() <= 3)
+				result ++;
+		}
+		result /= ws.length;
 		
 		return result;
 	}

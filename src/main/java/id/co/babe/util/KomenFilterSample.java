@@ -25,8 +25,8 @@ public class KomenFilterSample {
 	private static KomenDataset buildData() {
 		KomenDataset data = new KomenDataset();
 		data.updateData(DataReader.readSpamKomens(ROOT + "192_spams.txt"), 1);
-		data.updateData(DataReader.readSpamKomens(ROOT + "spam_15_2.txt"), 1);
-		data.updateData(DataReader.readSpamKomens(ROOT + "spam_komen.txt"), 0.8);
+		data.updateData(DataReader.readSpamKomens(ROOT + "15_3_spams.txt"), 1);
+		//data.updateData(DataReader.readSpamKomens(ROOT + "spam_komen.txt"), 0.8);
 		//data.updateData(DataReader.readSpamKomens(ROOT + "spam_output.txt.1"), 0.8);
 		data.updateData(DataReader.readNormalKomens(ROOT + "pure_comments.txt.1"), 0.8);
 		//data.updateData(DataReader.readSpamKomens(ROOT + "pure_spam.txt.1"), 0.8);
@@ -80,25 +80,25 @@ public class KomenFilterSample {
 			
 			String res = ruleInference(k.content);
 			
-			if (k.label == Komen.SPAM && res == Komen.NORMAL) {
-				falsePosList.add(RuleFilter.printRule(k.content));//k.content);//
-			}
-
-			if (k.label == Komen.NORMAL && res == Komen.SPAM) {
+			if (k.label.equals(Komen.SPAM) && res.equals(Komen.NORMAL)) {
 				falseNegList.add(RuleFilter.printRule(k.content));//k.content);//
 			}
 
-			if (k.label == Komen.NORMAL) {
-				if (res == Komen.NORMAL) {
+			if (k.label.equals(Komen.NORMAL) && res.equals(Komen.SPAM)) {
+				falsePosList.add(RuleFilter.printRule(k.content));//k.content);//
+			}
+
+			if (k.label.equals(Komen.NORMAL)) {
+				if (res.equals(Komen.NORMAL)) {
 					true_neg++;
-				} else {
-					false_neg++;
+				} else { // label == NORMAL && res == SPAM
+					false_pos++;
 				}
 			} else {
-				if (res == Komen.SPAM) {
+				if (res.equals(Komen.SPAM)) {
 					true_pos++;
-				} else {
-					false_pos++;
+				} else { // label == SPAM && res == NORMAL
+					false_neg++; 
 				}
 			}
 
@@ -106,7 +106,7 @@ public class KomenFilterSample {
 
 		System.out.println("\n\n");
 		System.out.println("False_pos: " + false_pos + " -- Total_pos: " + (false_pos + true_pos));
-		System.out.println("False_neg: " + false_neg + " -- Total_neg: " + (false_neg + true_neg));
+		System.out.println("False_neg: " + false_neg + " -- Total_true: " + (false_neg + true_pos));
 
 		TextfileIO.writeFile(ROOT + "false_negative.txt", falseNegList);
 		TextfileIO.writeFile(ROOT + "false_positive.txt", falsePosList);
