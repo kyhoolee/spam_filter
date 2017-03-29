@@ -146,7 +146,7 @@ public class Util {
 		while (matcher.find()) {
 			String str = matcher.group();
 			//System.out.println(str + " " + isLetterNumber(str) + " " + isLength8(str));
-			if(isLetterNumber(str) && isLength8(str)) {
+			if(isLetterNumber(str) && isLength8(str) && !str.contains(" ")) {
 				result.add(str);
 				//System.out.println(str);
 			}
@@ -154,7 +154,7 @@ public class Util {
 		while (matcher2.find()) {
 			String str = matcher2.group();
 			//System.out.println(str + " " + isLetterNumber(str) + " " + isLength8(str));
-			if(isLetterNumber(str) && isLength8(str)) {
+			if(isLetterNumber(str) && isLength8(str) && !str.contains(" ")) {
 				result.add(str);
 				//System.out.println(str);
 			}

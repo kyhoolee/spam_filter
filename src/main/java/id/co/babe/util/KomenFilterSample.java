@@ -15,20 +15,27 @@ public class KomenFilterSample {
 	}
 	
 	public static void checkRule() {
-		String data = "ÙÙ„Ø¹ï¿½ Ø© Ø§Ù„Ù„Ù‡ Ø¹Ù„Ù‰ Ø§Ù„ÙƒØ§ÙØ±ÙŠÙ†...";
-		String output = RuleFilter.deAccent(data);
-		System.out.println(output);
+		String data = "Mbak Inul, terlepas dukungan anda ke penista agama itu hak anda. Anda yg memilih anda jg yg akan diminta pertanggung jawaban.. yg kami gak terima, kenapa hrus mendukung sang penista dgn menjelekkan para Ulama.. apakah anda lupa dunia hanya sementara, tobat mbak, munpung masih diberi nyawa..."; 
+				//"Wùiiihhh...mañtappp, ini yg bikiñ hidùp lebih hidup...segerá mkñ disana, yg comeñt negatif pd munáfik tuh...pdhl suka jg.😜😛";
+				//"Program anies yg gagal adalah utk guru2. kenapa sy blg gagal ? krn guru2 dites kemampuannya menjadi guru yg profesional tesnya melalui online, banyak guru2 yg tdk lulus sehingga mrk harus meninggalkan siswa2nya ikut tes lagi bukan hanya 1, 2 atau 3 hari bahkan ada yg lebih. sementara ada lulus cara";
+				//"JAKARTA SKRG GAK TERLALU BUTUH PEMIMPIN YG SANTUN, TETAPI TDK BISA BEKERJA.!! KALAU ANIS BISA BEKERJA TENTU TIDAK DI PECAT JADI MENTERI OLEH JOKOWI.! APALAGI DIA TEAM SUKSES NYA JOKOWI SAAT ITU.!! ITU BERARTI KEMUNGKINAN BESAR SI ANIS INI MEMANG BETUL2 TIDAK BISA BEKERJA DGN BAIK.!! INGAT KAWAN.!!"; 
+				//"Taksi online ada karna taksi konvensional tak bisa memuaskan keinginan konsumen yaitu murah capat dan nyaman kalau taksi konvensional bisa bersaing dgn 3 hal tadi dijamin taksi online gak laku sepanjang 3 hal itu tak dilakukan jangan harap konsumen akan memakai taksi konvensioala jaman udah berubah";
+		String r = CommentFilter.ruleInference(data);
+		System.out.println(r);
+		System.out.println(RuleFilter.printRule(data));
+		System.out.println(RuleFilter.singlecharacterRule(data));
 	}
 
 	public static final String ROOT = "";//"/home/mainspring/tutorial/learn/text-classifier/data/";
 
 	private static KomenDataset buildData() {
 		KomenDataset data = new KomenDataset();
-		data.updateData(DataReader.readSpamKomens(ROOT + "192_spams.txt"), 1);
+		data.updateData(DataReader.readSpamKomens(ROOT + "spam.293.txt"), 1);
 		data.updateData(DataReader.readSpamKomens(ROOT + "15_3_spams.txt"), 1);
 		//data.updateData(DataReader.readSpamKomens(ROOT + "spam_komen.txt"), 0.8);
 		//data.updateData(DataReader.readSpamKomens(ROOT + "spam_output.txt.1"), 0.8);
-		data.updateData(DataReader.readNormalKomens(ROOT + "pure_comments.txt.1"), 0.8);
+		data.updateData(DataReader.readNormalKomens(ROOT + "normal.293.txt"), 1.0);
+		data.updateData(DataReader.readNormalKomens(ROOT + "pure_comments.txt.1"), 1.0);
 		//data.updateData(DataReader.readSpamKomens(ROOT + "pure_spam.txt.1"), 0.8);
 		//data.updateData(DataReader.readSpamKomens(ROOT + "pure_spam_1.txt.1"), 0.8);
 		//data.updateData(DataReader.readSpamKomens(ROOT + "spam_unique.txt.1"), 0.8);

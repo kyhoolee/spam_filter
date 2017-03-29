@@ -15,7 +15,9 @@ public class RuleFilter {
 	public static final Set<String> blackWords = new HashSet<String>(Arrays.asList(
 			"service", "sofa", "servis", "code", "kode", "facebook", "promo",
 			
-			"obat", "perangsang",  "kuat",
+			"obat", "perangsang",  "kuat", 
+			"herbal", 
+			"thor", "hammer", "pingin",
 			"sex", "sedia", "penis", "seks", "adult", "onani", "syahwat", "bokep", "khusus",
 			"vagina", "ejakulasi", "hubungan",
 			"besar", "panjang", "keras",
@@ -23,7 +25,7 @@ public class RuleFilter {
 			"0813", "0851", "0856", "0857", "0858","0821","0812", "0878", "0853", "0852",
 			"0818", "0877","081", "0822", "0811", "0877",
 			
-			"fb.com", "line", "p://", "www", "http://­"
+			"fb.com", "p://", "www", "http://­"
 			
 			));
 	
@@ -38,7 +40,7 @@ public class RuleFilter {
 				|| (singlecharacterRule(input) > 0.3)
 				|| (specialWordRule(input) >= 1 && blackWord(input) > 1)
 				|| (specialWordRule(input) > 3 && blackWord(input) >= 1)
-				|| (blackWord(input) >= 3) 
+				|| (blackWord(input) >= 5) 
 				|| (contactWord(input) >= 1)
 				|| (specialSpam(input))
 				) {
@@ -65,15 +67,15 @@ public class RuleFilter {
 	public static String printRule(String input) {
 		String sep = " -- ";
 		String result = (
-				specialWordRule(input) + sep 
-				+ singlecharacterRule(input)
-				+ specialCharacter(input) + sep
-				+ singlecharacterRule(input) + sep
-				+ blackWord(input) + sep 
-				+ contactWord(input) + sep
-				+ specialSpam(input) + sep
-				+ Util.stringList(pinWord(input)) + sep
-				+ input
+				"  " + specialWordRule(input) + sep 
+				+ "  " + singlecharacterRule(input) + sep
+				+ "  " + specialCharacter(input) + sep
+				+ "  " + singlecharacterRule(input) + sep
+				+ "  " + blackWord(input) + sep 
+				+ "  " + contactWord(input) + sep
+				+ "  " + specialSpam(input) + sep
+				+ "  " + Util.stringList(pinWord(input)) + sep
+				+ "  " + input
 				);
 
 		// System.out.println(result);
@@ -84,12 +86,25 @@ public class RuleFilter {
 		return Util.bbPin(input);
 	}
 	
+	
+	
+	public static String removeSpace(String input) {
+		String output = input.replaceAll("\\s+","");
+		
+		return output;
+	}
+	
 	public static double blackWord(String input) {
 		double result = 0; 
 		
 		for(String black : blackWords) {
-			result += Util.countSub(input.toLowerCase(), black);
+			double tmp = Util.countSub(removeSpace(input).toLowerCase(), black);
+//			if(tmp > 0) {
+//				System.out.print(black + " ");
+//			}
+			result += tmp;
 		}
+		//System.out.println();
 		
 		//result += Util.bbPin(input).size();
 		
@@ -102,7 +117,7 @@ public class RuleFilter {
 		result += Util.bbPin(input).size();
 		result += Util.phoneNumber(input).size();
 		result += Util.email(input).size();
-		
+		//System.out.println("Contactword: " + result);
 		return result;
 	}
 	
@@ -122,7 +137,7 @@ public class RuleFilter {
 				count ++;
 		}
 		
-		double check =(double) count * 1.0 / words.length;
+		double check = 0;//(double) count * 1.0 / words.length;
 		
 		return check;
 	}
@@ -132,7 +147,7 @@ public class RuleFilter {
 	public static double specialCharacter(String input) {
 		double result = 0; 
 		//String resultString = subjectString.replaceAll("[^\\x00-\\x7F]", "");
-		String alphaAndDigits = input.replaceAll("[�ﾀﾣﾤ£$_ß∆¥《》ŠŞÅ¬ð🅰♏♏ⓐβⓓΣ]+",""); //"[^\\x00-\\x7F]","");//
+		String alphaAndDigits = input.replaceAll("[ﾀﾣﾤ£$_ß∆¥《》ŠŞÅ¬ð🅰♏♏ⓐβⓓΣ]+",""); //"[^\\x00-\\x7F]","");//
 		result = input.length() - alphaAndDigits.length();
 		double size = input.split("\\s+").length;
 		result += accentDistance(input) /2;//0;//result / size;
@@ -200,13 +215,13 @@ public class RuleFilter {
 		boolean ns = false;
 		boolean cs = false;
 		for(int i = 0 ; i < words.length ; i ++) {
-			boolean n = words[i].matches(".*\\d+.*");
+			boolean n = false;//words[i].matches(".*\\d+.*");
 			boolean c = words[i].matches(".*[a-zA-Z]+.*");
 			
 //			Pattern p = Pattern.compile("[^a-z0-9 ]", Pattern.CASE_INSENSITIVE);
 //			Matcher m = p.matcher("I am a string");
 //			boolean s = m.find();
-			boolean s = words[i].matches(".*[!@#$%^&*€∆]+.*");
+			boolean s = words[i].matches(".*[�#$%^&*€∆]+.*");
 			
 			if((n&&c) || (n&&s) || (c&&s)) // 
 				count ++;
@@ -254,11 +269,8 @@ public class RuleFilter {
 	}
 	
 	public static void main(String[] args) {
-		String input = "V.1.A.G.R.A USA O.B.A.T K.U.A.T PATEN\n\n          ASLI ORIGINAL IMPORT\n\nO.B.A.T K.U.A.T NO 1\n\nMGATASI DIABET- KENCANG.T.LAMA\nTlp:0.81.2.28.4.49.4.99/pin:D18A5778 ※ VI@GRA USA,KLG USA,CIALIS\n※ PEMUTIH WAJAH/BADAN \n※ ALAT BANTU P/W DLL.."; 
-				//"JUαL  : V1∆GR∆ Pfizer USA 100mg \n\n                LASER   HOLOGRAM   \n                                                                                             LOGO KUDA BOLA API ¤RIGIN∆L \n\n  0.8.1.2.2.5.1.7.7.7.5.1    /  5e 69 44 67";
-		//		"JUαL  : \" V1∆GR∆ Pfizer USA \" 100mg \n              LOGO \" BOLA API KUDA\"  ¤RIGIN∆L \n\n                 \n  0 8 1 2 2 5 1 7 7 7  5 1       /     5e 6 9 44 67";
-		
-		System.out.println(printRule(input));
+		String input = " HAMMâ‚¬R OF THOR   C a p s u l  D o b e l  F u n g s i  O b a t  U n t u k  P e m b e s a r  P E N l S  D a n  K u a t  T a h a n  L a m a  P r o d u k  T e r b a i k  No.1 ðŸ’¯% H Ä“ r b a l  A m a n  T a n p a  E f e k  S a m p i n g.  M i n a t  H u b :  ðŸ’® Hp/WÃƒ : 08Z1 8788 1779 ðŸ’® ÃŸÃŸ : Ä549161Ä";
+		System.out.println(removeSpace(input));
 	}
 
 }
