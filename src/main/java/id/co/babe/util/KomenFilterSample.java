@@ -10,12 +10,13 @@ public class KomenFilterSample {
 		// ruleFilter();
 		// logisticFilter();
 		//trainModel();
-		estimate();
-		//checkRule();
+		//estimate();
+		checkRule();
 	}
 	
 	public static void checkRule() {
-		String data = "Mbak Inul, terlepas dukungan anda ke penista agama itu hak anda. Anda yg memilih anda jg yg akan diminta pertanggung jawaban.. yg kami gak terima, kenapa hrus mendukung sang penista dgn menjelekkan para Ulama.. apakah anda lupa dunia hanya sementara, tobat mbak, munpung masih diberi nyawa..."; 
+		String data = "P R O M O. HARGA. MURAH		PEM'BESAR. P E N I S. TERBAIK		-HAM*ER OF THOR		-OB*@T PR@NGSANG	-BONEKA FULL B O D Y 	-@L@T B@-NTU S E C K DLL		P I N : D 9 A 0 4 5 7 5	TLP/W A : 082-225-852-349";
+				//"Mbak Inul, terlepas dukungan anda ke penista agama itu hak anda. Anda yg memilih anda jg yg akan diminta pertanggung jawaban.. yg kami gak terima, kenapa hrus mendukung sang penista dgn menjelekkan para Ulama.. apakah anda lupa dunia hanya sementara, tobat mbak, munpung masih diberi nyawa..."; 
 				//"Wùiiihhh...mañtappp, ini yg bikiñ hidùp lebih hidup...segerá mkñ disana, yg comeñt negatif pd munáfik tuh...pdhl suka jg.😜😛";
 				//"Program anies yg gagal adalah utk guru2. kenapa sy blg gagal ? krn guru2 dites kemampuannya menjadi guru yg profesional tesnya melalui online, banyak guru2 yg tdk lulus sehingga mrk harus meninggalkan siswa2nya ikut tes lagi bukan hanya 1, 2 atau 3 hari bahkan ada yg lebih. sementara ada lulus cara";
 				//"JAKARTA SKRG GAK TERLALU BUTUH PEMIMPIN YG SANTUN, TETAPI TDK BISA BEKERJA.!! KALAU ANIS BISA BEKERJA TENTU TIDAK DI PECAT JADI MENTERI OLEH JOKOWI.! APALAGI DIA TEAM SUKSES NYA JOKOWI SAAT ITU.!! ITU BERARTI KEMUNGKINAN BESAR SI ANIS INI MEMANG BETUL2 TIDAK BISA BEKERJA DGN BAIK.!! INGAT KAWAN.!!"; 
@@ -30,12 +31,14 @@ public class KomenFilterSample {
 
 	private static KomenDataset buildData() {
 		KomenDataset data = new KomenDataset();
-		data.updateData(DataReader.readSpamKomens(ROOT + "spam.293.txt"), 1);
-		data.updateData(DataReader.readSpamKomens(ROOT + "15_3_spams.txt"), 1);
+		data.updateData(DataReader.readNormalKomens(ROOT + "7.4.normal.txt"), 0.5);
+		data.updateData(DataReader.readSpamKomens(ROOT + "spam.25.4.txt"), 1);
+		//data.updateData(DataReader.readSpamKomens(ROOT + "spam.293.txt"), 1);
+		//data.updateData(DataReader.readSpamKomens(ROOT + "15_3_spams.txt"), 1);
 		//data.updateData(DataReader.readSpamKomens(ROOT + "spam_komen.txt"), 0.8);
 		//data.updateData(DataReader.readSpamKomens(ROOT + "spam_output.txt.1"), 0.8);
-		data.updateData(DataReader.readNormalKomens(ROOT + "normal.293.txt"), 1.0);
-		data.updateData(DataReader.readNormalKomens(ROOT + "pure_comments.txt.1"), 1.0);
+		//data.updateData(DataReader.readNormalKomens(ROOT + "normal.293.txt"), 0.2);
+		//data.updateData(DataReader.readNormalKomens(ROOT + "pure_comments.txt.1"), 1.0);
 		//data.updateData(DataReader.readSpamKomens(ROOT + "pure_spam.txt.1"), 0.8);
 		//data.updateData(DataReader.readSpamKomens(ROOT + "pure_spam_1.txt.1"), 0.8);
 		//data.updateData(DataReader.readSpamKomens(ROOT + "spam_unique.txt.1"), 0.8);
@@ -88,7 +91,7 @@ public class KomenFilterSample {
 			String res = ruleInference(k.content);
 			
 			if (k.label.equals(Komen.SPAM) && res.equals(Komen.NORMAL)) {
-				falseNegList.add(RuleFilter.printRule(k.content));//k.content);//
+				falseNegList.add(k.content);//RuleFilter.printRule(k.content));//
 			}
 
 			if (k.label.equals(Komen.NORMAL) && res.equals(Komen.SPAM)) {

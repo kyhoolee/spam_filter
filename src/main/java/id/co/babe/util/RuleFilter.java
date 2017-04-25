@@ -15,9 +15,9 @@ public class RuleFilter {
 	public static final Set<String> blackWords = new HashSet<String>(Arrays.asList(
 			"service", "sofa", "servis", "code", "kode", "facebook", "promo",
 			
-			"obat", "perangsang",  "kuat", 
+			"obat", "perangsang",  "kuat", "porn",
 			"herbal", 
-			"thor", "hammer", "pingin",
+			"thor", "hammer", "pingin", "hamer",
 			"sex", "sedia", "penis", "seks", "adult", "onani", "syahwat", "bokep", "khusus",
 			"vagina", "ejakulasi", "hubungan",
 			"besar", "panjang", "keras",
@@ -40,7 +40,7 @@ public class RuleFilter {
 				|| (singlecharacterRule(input) > 0.3)
 				|| (specialWordRule(input) >= 1 && blackWord(input) > 1)
 				|| (specialWordRule(input) > 3 && blackWord(input) >= 1)
-				|| (blackWord(input) >= 5) 
+				|| (blackWord(input) >= 4) 
 				|| (contactWord(input) >= 1)
 				|| (specialSpam(input))
 				) {
