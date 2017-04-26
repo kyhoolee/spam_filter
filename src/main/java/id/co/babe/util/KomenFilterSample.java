@@ -15,7 +15,9 @@ public class KomenFilterSample {
 	}
 	
 	public static void checkRule() {
-		String data = "P R O M O. HARGA. MURAH		PEM'BESAR. P E N I S. TERBAIK		-HAM*ER OF THOR		-OB*@T PR@NGSANG	-BONEKA FULL B O D Y 	-@L@T B@-NTU S E C K DLL		P I N : D 9 A 0 4 5 7 5	TLP/W A : 082-225-852-349";
+		String data = "P R O M O. HARGA. MURAH\n\nPEM'BESAR. P E N I S. TERBAIK\n\n-HAM*ER OF T-H-O-R\n\n-OB*@T PR@NGSANG\n-BONEKA FULL B O D Y \n-@L@T B@-NTU S E C K DLL\n\nP I N : D 9 A 0 4 5 7 5\nTLP/W A : 082-225-852-349"; 
+				//"P R O M O. HARGA. MURAH PEM'BESAR. P E N I S. TERBAIK -HAM*ER OF THOR -OB*@T PR@NGSANG -BONEKA FULL B O D Y -@L@T B@-NTU S E C K DLL P I N : D 9 A 0 4 5 7 5 TLP/W A : 082-225-852-349"; 
+				//"P R O M O. HARGA. MURAH		PEM'BESAR. P E N I S. TERBAIK		-HAM*ER OF THOR		-OB*@T PR@NGSANG	-BONEKA FULL B O D Y 	-@L@T B@-NTU S E C K DLL		P I N : D 9 A 0 4 5 7 5	TLP/W A : 082-225-852-349";
 				//"Mbak Inul, terlepas dukungan anda ke penista agama itu hak anda. Anda yg memilih anda jg yg akan diminta pertanggung jawaban.. yg kami gak terima, kenapa hrus mendukung sang penista dgn menjelekkan para Ulama.. apakah anda lupa dunia hanya sementara, tobat mbak, munpung masih diberi nyawa..."; 
 				//"Wùiiihhh...mañtappp, ini yg bikiñ hidùp lebih hidup...segerá mkñ disana, yg comeñt negatif pd munáfik tuh...pdhl suka jg.😜😛";
 				//"Program anies yg gagal adalah utk guru2. kenapa sy blg gagal ? krn guru2 dites kemampuannya menjadi guru yg profesional tesnya melalui online, banyak guru2 yg tdk lulus sehingga mrk harus meninggalkan siswa2nya ikut tes lagi bukan hanya 1, 2 atau 3 hari bahkan ada yg lebih. sementara ada lulus cara";

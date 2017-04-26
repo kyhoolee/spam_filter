@@ -29,10 +29,13 @@ public class RuleFilter {
 			
 			));
 	
-	
+	public static String preProcess(String input) {
+		String result = input.replace("\n", " ");
+		return result;
+	}
 	
 	public static String ruleSpam(String input) {
-
+		input = preProcess(input);
 		if(
 			(specialWordRule(input) > 3)  
 			|| (singlecharacterRule(input) > 0.75)
@@ -52,8 +55,7 @@ public class RuleFilter {
 	
 
 	public static String ruleNormal(String input) {
-		//0.017857142857142856 -- 42.0 -- 12 -- 0.0 -- 0.0 -- 
-		//0.027522935779816515 -- 19.0 -- 0 -- 0.10526315789473684 -- 0.0 
+		input = preProcess(input);
 		if( 
 				(specialWordRule(input) < 10 && blackWord(input) < 1 && contactWord(input) < 1 && !specialSpam(input) && specialCharacter(input) < 1 && singlecharacterRule(input) < 0.7)
 				|| (blackWord(input) <= 1 && specialWordRule(input) <= 2 && singlecharacterRule(input) <= 1 && contactWord(input) < 1 && !specialSpam(input) && specialCharacter(input) < 1 && singlecharacterRule(input) < 0.7)
