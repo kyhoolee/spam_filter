@@ -74,9 +74,9 @@ public class Util {
 	}
 
 	public static String filter(String input) {
-		input = input.replace("\\n", " ");
-		input = input.replace(",", " ");
-		input = input.replace("\",\"", " ");
+		//input = input.replace("\\n", " ");
+		//input = input.replace(",", " ");
+		//input = input.replace("\",\"", " ");
 		return input;
 	}
 

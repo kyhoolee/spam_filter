@@ -34,21 +34,36 @@ public class RuleFilter {
 		return result;
 	}
 	
-	public static String ruleSpam(String input) {
-		input = preProcess(input);
+	public static String simply(String input) {
+		String result = input.replaceAll("[\\-\\+\\.\\^\\:\\,]", "");;
+		System.out.println(result);
+		return result;
+	}
+	
+	public static boolean check(String input) {
 		if(
 			(specialWordRule(input) > 3)  
-			|| (singlecharacterRule(input) > 0.75)
-				|| (specialCharacter(input) > 2)
-				|| (singlecharacterRule(input) > 0.3)
-				|| (specialWordRule(input) >= 1 && blackWord(input) > 1)
-				|| (specialWordRule(input) > 3 && blackWord(input) >= 1)
-				|| (blackWord(input) >= 4) 
-				|| (contactWord(input) >= 1)
-				|| (specialSpam(input))
-				) {
+				|| (singlecharacterRule(input) > 0.75)
+					|| (specialCharacter(input) > 2)
+					|| (singlecharacterRule(input) > 0.3)
+					|| (specialWordRule(input) >= 1 && blackWord(input) > 1)
+					|| (specialWordRule(input) > 3 && blackWord(input) >= 1)
+					|| (blackWord(input) >= 4) 
+					|| (contactWord(input) >= 1)
+					|| (specialSpam(input))
+			) {
+			return true;
+		}
+		return false;
+	}
+	
+	public static String ruleSpam(String input) {
+		input = preProcess(input);
+		if(check(input) || check(simply(input))) {
 			return Komen.SPAM;
 		}
+		
+		
 		
 		return Komen.NORMAL;
 	}
