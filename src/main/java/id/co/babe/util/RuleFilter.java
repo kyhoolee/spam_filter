@@ -15,7 +15,7 @@ public class RuleFilter {
 	public static final Set<String> blackWords = new HashSet<String>(Arrays.asList(
 			"service", "sofa", "servis", "code", "kode", "facebook", "promo",
 			
-			"obat", "perangsang",  "kuat", "porn",
+			"obat", "perangsang",  "kuat", "porn", "viagra", "jual", "vimax", "bbm",
 			"herbal", 
 			"thor", "hammer", "pingin", "hamer",
 			"sex", "sedia", "penis", "seks", "adult", "onani", "syahwat", "bokep", "khusus",
@@ -35,12 +35,12 @@ public class RuleFilter {
 	}
 	
 	public static String simply(String input) {
-		String result = input.replaceAll("[\\-\\+\\.\\^\\:\\,]", "");;
+		String result = input.replaceAll("[\\-\\+\\.\\^\\:\\,]", "").toLowerCase();
 		System.out.println(result);
 		return result;
 	}
 	
-	public static boolean check(String input) {
+	public static boolean checkSpam(String input) {
 		if(
 			(specialWordRule(input) > 3)  
 				|| (singlecharacterRule(input) > 0.75)
@@ -59,7 +59,7 @@ public class RuleFilter {
 	
 	public static String ruleSpam(String input) {
 		input = preProcess(input);
-		if(check(input) || check(simply(input))) {
+		if(checkSpam(input) || checkSpam(simply(input))) {
 			return Komen.SPAM;
 		}
 		
@@ -71,14 +71,20 @@ public class RuleFilter {
 
 	public static String ruleNormal(String input) {
 		input = preProcess(input);
+		if(checkNormal(input) && checkNormal(simply(input))) {
+			return Komen.NORMAL;
+		}
+		return Komen.SPAM;
+	}
+	
+	public static boolean checkNormal(String input) {
 		if( 
 				(specialWordRule(input) < 10 && blackWord(input) < 1 && contactWord(input) < 1 && !specialSpam(input) && specialCharacter(input) < 1 && singlecharacterRule(input) < 0.7)
 				|| (blackWord(input) <= 1 && specialWordRule(input) <= 2 && singlecharacterRule(input) <= 1 && contactWord(input) < 1 && !specialSpam(input) && specialCharacter(input) < 1 && singlecharacterRule(input) < 0.7)
 				) {
-			return Komen.NORMAL;
+			return true;
 		}
-		
-		return Komen.SPAM;
+		return false;
 	}
 	
 	public static String printRule(String input) {

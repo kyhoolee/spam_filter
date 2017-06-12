@@ -10,8 +10,8 @@ public class KomenFilterSample {
 		// ruleFilter();
 		// logisticFilter();
 		//trainModel();
-		estimate();
-		//checkRule();
+		//estimate();
+		checkRule();
 		//filter();
 	}
 	
@@ -24,7 +24,12 @@ public class KomenFilterSample {
 	}
 	
 	public static void checkRule() {
-		String data = "A-g-e-n  R-e-s-m-i Hub.O81,220,179,777 OBAT BIG LONG AL4T VIT4 L  ANABOLIC RX24 ASLiii DAN OBAT KUAT, TAHAN L4 M4"; 
+		String data = "J.U.A.L: O.B.A.T: H.E.R.B.A.L: V.I.A.G.R.A  U.S.A: V.I.M.A.X  C.A.N.A.D.A: H.A.M.M.E.R  O.F  T.H.O.R: P.E.M.E.S.A.N.A.N: T.L.P.N  W.A  0.8  2.3  1.3  3.8  6.6  6.7: B.B.M  D.9  9.B  E.D  9.6: B.B.M  D.8  F.0  E.0  5.5";
+				
+				
+				
+				
+				//"A-g-e-n  R-e-s-m-i Hub.O81,220,179,777 OBAT BIG LONG AL4T VIT4 L  ANABOLIC RX24 ASLiii DAN OBAT KUAT, TAHAN L4 M4"; 
 				//"A-g-e-n R-e-s-m-i Hub.O81,220,179,777 OBAT BIG LONG AL4T VIT4 L ANABOLIC RX24 ASLiii DAN OBAT KUAT, TAHAN L4 M4"; 
 				//"2 βonμ$ 1 frree ongkir V-I-A-G-R-A / V-I-M-A-X / H-A-M-M-E-R . P-A-N-J-A-N-G / B-E-S-A-R / K-E-R-A-S / K-U-A-T /  T-A-H-A-N / L-A-M-A / CE GAH: I-M-P-O-T-E-N / L-M-H,S-Y-A-H-W-A-T/M-A-N-I E-N-C-E-R /E-J-A-K-U-L-A-S-I,D-I-N-I  T. 08-22-27-19-44-69 Bm. 2-6-C-5-3-8-A-3 A-W-A-S / P-A-L-S-U /FATAL";
 				//"P R O M O. HARGA. MURAH\n\nPEM'BESAR. P E N I S. TERBAIK\n\n-HAM*ER OF T-H-O-R\n\n-OB*@T PR@NGSANG\n-BONEKA FULL B O D Y \n-@L@T B@-NTU S E C K DLL\n\nP I N : D 9 A 0 4 5 7 5\nTLP/W A : 082-225-852-349"; 
