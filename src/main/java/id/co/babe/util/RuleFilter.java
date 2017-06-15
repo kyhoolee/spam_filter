@@ -37,6 +37,7 @@ public class RuleFilter {
 	public static String simply(String input) {
 		String result = input.replaceAll("[\\-\\+\\.\\^\\:\\,]", "").toLowerCase();
 		System.out.println(result);
+		System.out.println(result);
 		return result;
 	}
 	
@@ -58,8 +59,11 @@ public class RuleFilter {
 	}
 	
 	public static String ruleSpam(String input) {
+		System.out.println("----------------");
 		input = preProcess(input);
+		System.out.println(checkSpam(input));
 		if(checkSpam(input) || checkSpam(simply(input))) {
+			System.out.println("-------check spam ------ spam");
 			return Komen.SPAM;
 		}
 		
@@ -71,7 +75,10 @@ public class RuleFilter {
 
 	public static String ruleNormal(String input) {
 		input = preProcess(input);
+		System.out.println(checkNormal(input));
+		System.out.println(checkNormal(simply(input)));
 		if(checkNormal(input) && checkNormal(simply(input))) {
+			System.out.println("---------check normal --------- normal");
 			return Komen.NORMAL;
 		}
 		return Komen.SPAM;
