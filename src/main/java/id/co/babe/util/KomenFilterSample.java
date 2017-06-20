@@ -24,7 +24,8 @@ public class KomenFilterSample {
 	}
 	
 	public static void checkRule() {
-		String data = "P R O M O. HARGA. MURAH\n\nPEM''BESAR. P E N I S. TERBAIK\n\n* TITAN JELL\n* Ha MM_ER\n* V-I-M-A-X\n* V-I-A-G-R-A U-S-A\n\n-♡BAT P★RANGSANG\n-BONEKA FULL B O D Y \n-aLaT Ba-NTU S E C K DLL\n\nP I N : D 9 A 0 4 5 7 5\nTLP/W A : 082 ★ 225 852 349";
+		String data = "8USUK, Di RAMADHAN MAKIN RAME. BABE di SPONSORI oleh 9 (SEMBILAN) PENJUAL OBAT2 & ALAT2 SEKS :  \n1.Shieva Farmaku  \n2.Dalan Anyar\n3.Ahmad Zakky\n4. Abeng Ahmad \n5. Bima Ina\n6. Riska Aprilia\n7. Dila Putri\n8.Bojes Al Asrof\n9.Alvian Varma"; 
+				//"P R O M O. HARGA. MURAH\n\nPEM''BESAR. P E N I S. TERBAIK\n\n* TITAN JELL\n* Ha MM_ER\n* V-I-M-A-X\n* V-I-A-G-R-A U-S-A\n\n-♡BAT P★RANGSANG\n-BONEKA FULL B O D Y \n-aLaT Ba-NTU S E C K DLL\n\nP I N : D 9 A 0 4 5 7 5\nTLP/W A : 082 ★ 225 852 349";
 				//"P R O M O. HARGA. MURAH PEM'BESAR. P E N I S. TERBAIK * TITAN JELL * Ha MM_ER * V-I-M-A-X * V-I-A-G-R-A U-S-A -â¡BAT PâRANGSANG -BONEKA FULL B O D Y -aLaT Ba-NTU S E C K DLL P I N : D 9 A 0 4 5 7 5 TLP/W A : 082 â 225 852 349"; 
 		System.out.println(data);
 		String r = CommentFilter.ruleInference(data);
